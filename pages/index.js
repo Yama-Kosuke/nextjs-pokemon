@@ -1,8 +1,7 @@
 import Head from "next/Head";
-import Layout from "../components/Layout";
 import Link from "next/Link";
+import Layout from "../components/Layout";
 export default function Home({ pokemon }) {
-  console.log(pokemon)
   return (
     <Layout title="NextJS Pokedex">
       <h1 className="text-4xl mb-8 text-center ">The Nextjs Pokedex</h1>
@@ -32,9 +31,9 @@ export async function getStaticProps(context) {
     const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=898");
     const { results } = await res.json();
     const pokemon = results.map((pokeman, index) => {
-      const paddedIndex = ("00" + (index + 1)).slice(-3);
+      const paddedId = ("00" + (index + 1)).slice(-3);
 
-      const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${paddedIndex}.png`;
+      const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
       return { ...pokeman, image };
     });
     return {
